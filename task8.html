@@ -2,60 +2,91 @@
     <html>
     <body>
         <style>
+          body {
+            background: linear-gradient(90deg, rgba(29,11,71,1) 17%, rgba(69,6,117,1) 40%, rgba(115,67,16,1) 70%);
+}
             * {
               box-sizing: border-box;
             }
             
             .column {
               float: left;
-              width: 33.33%;
-              padding: 5px;
+              width: 25%;
+              padding: 20px;
             }
-            
-            /* Clearfix (clear floats) */
+        
             .row::after {
+              display: flex;
               content: "";
               clear: both;
               display: table;
             }
             </style>
-            <div class="row">
-                <div class="column">
-                  <img  id="one">
-                </div>
-                <div class="column">
-                  <img src="img_forest.jpg" alt="Forest" style="width:100%">
-                </div>
-                <div class="column">
-                  <img src="img_mountains.jpg" alt="Mountains" style="width:100%">
-                </div>
-              </div>
-        <!-- <div class="row">
-            <div class="column" style="background-color: rgb(0, 4, 255); width: 50px; height: 50px;" onclick="xSignDisplayLetter()" id="one"></div>
-            <br/>
-            <div class="column" style="background-color: rgb(0, 4, 255); width: 50px; height: 50px;" onclick="xSignDisplayLetterVerTwo()" id="two"></div>
-            <br/>
-            <div class="column" style="background-color: rgb(0, 4, 255); width: 50px; height: 50px;" onclick="revealImg()" id="image"></div>
-        </div> -->
-    <script>
-    function revealImg() {
-        var path = document.getElementById("image").innerHTML = "<img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' alt='Image' style='width: 50px; height: 50px;' />"
-        return path;
-    }
-    function xSignDisplayLetter() {
-        document.getElementById("one").innerHTML = "<img src='https://image.freepik.com/free-icon/x-symbol_318-1407.jpg' alt='Image' style='width: 50px; height: 50px;' />"
-    }
-    function xSignDisplayLetterVerTwo() {
-        document.getElementById("two").innerHTML = "<img src='https://d3qdvvkm3r2z1i.cloudfront.net/media/catalog/product/cache/1/image/1800x/6b9ffbf72458f4fd2d3cb995d92e8889/n/o/nope_newthumb.png' alt='Image' style='width: 50px; height: 50px;' />"
+
+<div class="row">
+    <div class="column">
+      <img id="0" src="Images/0.jpg" alt="Bee"  style="width:100%" onclick="change(id)">
+    </div>
+    <div class="column">
+      <img id="1" src="Images/1.jpg" alt="Bear"  style="width:100%" onclick="change(id)">
+    </div>
+    <div class="column">
+      <img id="2" src="Images/2.jpg" alt="Dog" style="width:100%" onclick="change(id)">
+    </div>
+    <div class="column">
+        <img id="3" src="Images/3.jpg" alt="Parrot" style="width:100%" onclick="change(id)")>
+    </div>
+</div>
+<div class="row">
+    <div class="column">
+      <img id="4" src="Images/4.jpg" alt="Fish" style="width:100%" onclick="change(id)">
+    </div>
+    <div class="column">
+      <img id="5" src="Images/5.jpg" alt="Lion" style="width:100%" onclick="change(id)">
+    </div>
+    <div class="column">
+      <img id="6" src="Images/6.jpg" alt="Monkey"  style="width:100%" onclick="change(id)">
+    </div>
+    <div class="column">
+        <img id="7" src="Images/7.jpg" alt="Cat"  style="width:100%" onclick="change(id)">
+    </div>
+    <h6>asnwer:Bear</h6>
+</div>
+<button id="rndBtn" onclick="DrawAll()">Load random</button>
+
+    <script language="javascript">
+        var Images = ['Images/0.jpg','Images/1.jpg','Images/2.jpg','Images/3.jpg','Images/4.jpg','Images/5.jpg','Images/6.jpg','Images/7.jpg'];
+        var stan= [];
+        var answer ="Bear";
+
+        function changeImage(id) {
         }
+        function getOrigin(){
+          for(let i =0;i <Images.length;i++){
+            var original = document.getElementById(i).src;
+            stan.push(original);
+          }
+          return stan
+        }
+        
+        function change(id){       
+            if(document.getElementById(id).src ==stan[id]){
+              document.getElementById(id).src = 'Images/back.jpg';                 
+            }else{      
+              document.getElementById(id).src = stan[id];
+            }
+        }
+        window.onload = function() {
+          getOrigin();
+        }
+        function getRandomIntInclusive(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        function DrawAll(){
 
-        function getImagePath(){
-     return "https://image.freepik.com/free-icon/x-symbol_318-1407.jpg";
-   }
-   document.onload = function(){
-       document.getElementById('one').src=getImagePath();
-   };
-
+        }
     </script>
     </body>
     </html>
