@@ -17,3 +17,8 @@ body {
      clear: both;
      display: table;
   }
+  .zoom:hover {
+    -ms-transform: scale(0.5); 
+    -webkit-transform: scale(0.5); 
+    transform: scale(1.05); 
+}  

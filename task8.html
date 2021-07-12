@@ -4,38 +4,40 @@
     <link rel="stylesheet" href="style.css" type="text/css">
 <div class="row">
     <div class="column">
-      <img id="0" src="Images/back.jpg" alt="Bee"  style="width:100%" onclick="changeAndCheck(id)">
+      <img class="zoom" id="0" src="Images/back.jpg" alt=""  style="width:100%" onclick="changeAndCheck(id)">
     </div>
     <div class="column">
-      <img id="1" src="Images/back.jpg" alt="Bear"  style="width:100%" onclick="changeAndCheck(id)">
+      <img class="zoom" id="1" src="Images/back.jpg" alt=""  style="width:100%" onclick="changeAndCheck(id)">
     </div>
     <div class="column">
-      <img id="2" src="Images/back.jpg" alt="Dog" style="width:100%" onclick="changeAndCheck(id)">
+      <img class="zoom" id="2" src="Images/back.jpg" alt="" style="width:100%" onclick="changeAndCheck(id)">
     </div>
     <div class="column">
-        <img id="3" src="Images/back.jpg" alt="Parrot" style="width:100%" onclick="changeAndCheck(id)")>
+        <img class="zoom" id="3" src="Images/back.jpg" alt="" style="width:100%" onclick="changeAndCheck(id)")>
     </div>
 </div>
 <div class="row">
     <div class="column">
-      <img id="4" src="Images/back.jpg" alt="Bee" style="width:100%" onclick="changeAndCheck(id)">
+      <img class="zoom" id="4" src="Images/back.jpg" alt="" style="width:100%" onclick="changeAndCheck(id)">
     </div>
     <div class="column">
-      <img id="5" src="Images/back.jpg" alt="Bear" style="width:100%" onclick="changeAndCheck(id)">
+      <img class="zoom" id="5" src="Images/back.jpg" alt="" style="width:100%" onclick="changeAndCheck(id)">
     </div>
     <div class="column">
-      <img id="6" src="Images/back.jpg" alt="Dog"  style="width:100%" onclick="changeAndCheck(id)">
+      <img class="zoom" id="6" src="Images/back.jpg" alt=""  style="width:100%" onclick="changeAndCheck(id)">
     </div>
     <div class="column">
-        <img id="7" src="Images/back.jpg" alt="Parrot"  style="width:100%" onclick="changeAndCheck(id)">
+        <img class="zoom" id="7" src="Images/back.jpg" alt=""  style="width:100%" onclick="changeAndCheck(id)">
     </div>
-    <h6>asnwer:Bear</h6>
 </div>
-<button id="rndBtn">Load random</button>
+<button id="rndBtn" onclick="Reload()">Load random</button>
     <script language="javascript">
+        var alt =["Bee","Bear","Dog","Parrot"]; 
         var Images = ['Images/0.jpg','Images/1.jpg','Images/2.jpg','Images/3.jpg','Images/4.jpg','Images/5.jpg','Images/6.jpg','Images/7.jpg'];
+        //array stan holds the original paths to images so we can return card to back upon wrong match
         var stan= [];
         var answerarray = [];
+        var merged = [];
         var iterator = 0;
 
         //function gets what image is on default for a card
@@ -52,12 +54,16 @@
         function changeAndCheck(id){
           iterator++;
           if(document.getElementById(id).src ==stan[id]){
-              //change image upon click             
-              document.getElementById(id).src = Images[id];
+              //change image upon click 
+              if(id<4){
+                  document.getElementById(id).src = Images[merged[id]];
+                }else{
+                  document.getElementById(id).src = Images[merged[id]+4];
+                }
+
               //save our asnwer                         
               answerarray.push(id);
               console.log(answerarray);  
-              document.getElementById(id).disabled = true;
               //if we have two choices made go on             
               if( iterator %2==0){
                 //check asnwers by alt
@@ -82,32 +88,46 @@
               document.getElementById(id).src = stan[id];
               //remove asnwer from array upon uchecking
               answerarray.pop(stan[id]);
-            }            
+            }   
+            // drawn = false;         
         }
         window.onload = function() {
           getOrigin();
+          drawImages();
         }
+        //draws randomly a number between two values including them also 
         function getRandomIntInclusive(min, max) {
             min = Math.ceil(min);
             max = Math.floor(max);
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
-        function check(){
 
+        function drawImages(){
+          for(let j = 0;j<8;j++){
+            document.getElementById(j).src = stan[j];
+          }
+          var temp = getRandomArrayNumbers(4,0,3);
+          var temp2 = getRandomArrayNumbers(4,0,3);
+          //merged2 = temp.concat(temp3)
+          merged = temp.concat(temp2);      
+          //console.log("temp3: "+temp3);
+          for(let i = 0;i<merged.length;i++){
+            document.getElementById(i).alt = alt[merged[i]];
+          }
+          console.log("answers: "+merged);
         }
-        // function CorrectAnswers(){
-        //   for(let i = 0;i < Images.length;i++){
-        //     //var a =  document.getElementById(i).alt;
-        //     for(let j = 1;j < Images.length;j++){
-        //       if(document.getElementById(i).alt == document.getElementById(j).alt){
-        //         var asnw1 = document.getElementById(i).src;
-        //         var asnw2 = document.getElementById(j).src;
-        //         test.push(i,j);
-        //         console.log("test: "+test);
-        //       } 
-        //     }
-        //   }   
-        // }
+
+        function Reload(){
+          window.location.reload(true);
+        }
+        //returns array of random numbers between two numbers - our not repeating images
+        function getRandomArrayNumbers(qt,lowerlimit,upperlimit){
+          let indexSet = new Set();
+          while(indexSet.size != qt){
+            indexSet.add(getRandomIntInclusive(lowerlimit, upperlimit));
+          }
+            return Array.from(indexSet);
+        } 
     </script>
     </body>
     </html>
