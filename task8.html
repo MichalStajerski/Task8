@@ -34,7 +34,8 @@
   <button class="glow-on-hover" id="rndBtn" onclick="Reload()">Retake</button>
 </div>
     <script language="javascript">
-        var alt =["Bee","Bear","Dog","Parrot"]; 
+        // alt array is has duplicates for 
+        var alt =["Bee","Bear","Dog","Parrot","Bee","Bear","Dog","Parrot"]; 
         var Images = ['Images/0.jpg','Images/1.jpg','Images/2.jpg','Images/3.jpg','Images/4.jpg','Images/5.jpg','Images/6.jpg','Images/7.jpg'];
         //stan array holds the original paths to images so we can return card to back upon wrong match
         var stan= [];
@@ -57,12 +58,7 @@
           iterator++;
           if(document.getElementById(id).src ==stan[id]){
               //change image upon click 
-              if(id<4){
-                  document.getElementById(id).src = Images[merged[id]];
-                }else{
-                  document.getElementById(id).src = Images[merged[id]+4];
-                }
-
+              document.getElementById(id).src = Images[merged[id]];
               //save our asnwer                         
               answerarray.push(id);
               console.log(answerarray);  
@@ -108,14 +104,13 @@
             document.getElementById(j).src = stan[j];
           }
           var temp = getRandomArrayNumbers(4,0,3);
-          var temp2 = getRandomArrayNumbers(4,0,3);
-          //merged2 = temp.concat(temp3)
-          merged = temp.concat(temp2);      
-          //console.log("temp3: "+temp3);
+          var temp2 = getRandomArrayNumbers(4,4,7);
+          merged = temp.concat(temp2)
+          merged = shuffle(merged);
+          console.log("merged: " +merged);            
           for(let i = 0;i<merged.length;i++){
             document.getElementById(i).alt = alt[merged[i]];
           }
-          console.log("answers: "+merged);
         }
         //fucntion for our button
         function Reload(){
@@ -129,6 +124,21 @@
           }
             return Array.from(indexSet);
         } 
+
+        function shuffle(array) {
+          var currentIndex = array.length,  randomIndex;
+
+          //while there remain elements to shuffle
+          while (0 !== currentIndex) {
+            //pick a remaining element
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+          //and swap it with the current element.
+          [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
+          }
+          return array;
+        }
     </script>
     </body>
     </html>
