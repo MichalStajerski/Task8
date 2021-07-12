@@ -30,11 +30,13 @@
         <img class="zoom" id="7" src="Images/back.jpg" alt=""  style="width:100%" onclick="changeAndCheck(id)">
     </div>
 </div>
-<button id="rndBtn" onclick="Reload()">Load random</button>
+<div class="button-center">
+  <button class="glow-on-hover" id="rndBtn" onclick="Reload()">Retake</button>
+</div>
     <script language="javascript">
         var alt =["Bee","Bear","Dog","Parrot"]; 
         var Images = ['Images/0.jpg','Images/1.jpg','Images/2.jpg','Images/3.jpg','Images/4.jpg','Images/5.jpg','Images/6.jpg','Images/7.jpg'];
-        //array stan holds the original paths to images so we can return card to back upon wrong match
+        //stan array holds the original paths to images so we can return card to back upon wrong match
         var stan= [];
         var answerarray = [];
         var merged = [];
@@ -88,8 +90,7 @@
               document.getElementById(id).src = stan[id];
               //remove asnwer from array upon uchecking
               answerarray.pop(stan[id]);
-            }   
-            // drawn = false;         
+            }         
         }
         window.onload = function() {
           getOrigin();
@@ -116,7 +117,7 @@
           }
           console.log("answers: "+merged);
         }
-
+        //fucntion for our button
         function Reload(){
           window.location.reload(true);
         }
