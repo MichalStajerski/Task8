@@ -2,33 +2,8 @@
   <html>
   <body id="body">
   <link rel="stylesheet" href="style.css" type="text/css">
-<div class="row">
-    <div class="column">
-      <img class="zoom img" id="0" src="Images/back.jpg" alt=""  style="width:80%" onclick="changeAndCheck(id)">
-    </div>
-    <div class="column">
-      <img class="zoom img" id="1" src="Images/back.jpg" alt=""  style="width:80%" onclick="changeAndCheck(id)">
-    </div>
-    <div class="column">
-      <img class="zoom img" id="2" src="Images/back.jpg" alt="" style="width:80%" onclick="changeAndCheck(id)">
-    </div>
-    <div class="column">
-        <img class="zoom img" id="3" src="Images/back.jpg" alt="" style="width:80%" onclick="changeAndCheck(id)")>
-    </div>
-</div>
-<div class="row">
-    <div class="column">
-      <img class="zoom img" id="4" src="Images/back.jpg" alt="" style="width:80%" onclick="changeAndCheck(id)">
-    </div>
-    <div class="column">
-      <img class="zoom img" id="5" src="Images/back.jpg" alt="" style="width:80%" onclick="changeAndCheck(id)">
-    </div>
-    <div class="column">
-      <img class="zoom img"  id="6" src="Images/back.jpg" alt="" style="width:80%"  onclick="changeAndCheck(id)">
-    </div>
-    <div class="column">
-        <img class="zoom img" id="7" src="Images/back.jpg" alt="" style="width:80%"  onclick="changeAndCheck(id)">
-    </div>
+<div id="layout">
+
 </div>
 <div class="button-center">
   <button class="glow-on-hover button-center " onclick="Reload()">Retake</button>
@@ -90,7 +65,9 @@
           answerarray.pop(stan[id]);
         }         
       }
+      
     window.onload = function() {
+      CreateLayout();
       getOrigin();
       drawImages();
     }
@@ -142,6 +119,47 @@
       }
       return array;
     }  
+    //dynamically creates our elements instead of hardcoded html code like it was before
+    function CreateLayout() {
+      var divrow = document.createElement('div');
+      divrow.setAttribute("class","row");
+      divrow.setAttribute("id","diva")
+      var divrow2 = document.createElement('div');
+      divrow2.setAttribute("class","row");
+      document.getElementById("layout").appendChild(divrow);
+      document.getElementById("layout").appendChild(divrow2);
+      for(let i =0;i<Images.length;i++){
+        if(i<4){
+          var div = document.createElement('div');
+          div.setAttribute("class","column");
+          div.setAttribute("id","divcol")
+          var img = document.createElement('img');
+          img.setAttribute("src","Images/back.jpg");
+          img.setAttribute("class","zoom img");
+          img.setAttribute("style","width:80%");
+          img.setAttribute("alt"," ");
+          img.setAttribute("onclick","changeAndCheck(id)")
+          img.id= i;
+          img.alt = "";
+          div.appendChild(img);
+          divrow.appendChild(div);     
+        }else{
+          var div = document.createElement('div');
+          div.setAttribute("class","column");
+          div.setAttribute("id","divcol")
+          var img = document.createElement('img');
+          img.setAttribute("src","Images/back.jpg");
+          img.setAttribute("class","zoom img");
+          img.setAttribute("style","width:80%");
+          img.setAttribute("alt"," ");
+          img.setAttribute("onclick","changeAndCheck(id)")
+          img.id= i;
+          img.alt = "";
+          div.appendChild(img);
+          divrow2.appendChild(div);
+        }
+      }             
+    }
   </script>
 </body>
 </html>
